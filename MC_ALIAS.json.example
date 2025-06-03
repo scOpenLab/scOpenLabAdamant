@@ -1,0 +1,7 @@
+{
+	"url":"https://S3_EXAMPLE_URL",
+	"accessKey":"ACCESS_KEY",
+	"secretKey":"SECRET_KEY",
+	"api":"s3v2",
+	"path":"auto"
+}
