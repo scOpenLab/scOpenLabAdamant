@@ -5,12 +5,42 @@
 	"description":"Xenium Slide Metadata, please click the 'COMPILE' button at the bottom before filling in the form.",
 	"type":"object",
 	"properties":{
-		"stringTypeObject":{
+		"slide_id":{
 			"title":"Slide ID",
 			"description":"Xenium Slide ID (e.g. 0001676)",
 			"type":"string"
 		},
-		"arrayTypeObject":{
+		"project":{
+			"title":"Project",
+			"description":"The name of the associated research project.",
+			"type":"string"
+		},
+		"OE_project":{
+			"title":"OE Project",
+			"description":"Identifier for the OE project.",
+			"type":"string"
+		},
+		"panel":{
+			"title":"Panel",
+			"description":"Panel used in the Xenium assay.",
+			"type":"string"
+		},
+		"data_acquisition":{
+			"title":"Data Acquisition",
+			"description":"Data acquisition.",
+			"type":"string"
+		},
+		"kit_version":{
+			"title":"Kit Version",
+			"description":"Version of the Xenium kit used.",
+			"type":"string"
+		},
+		"add_on":{
+			"title":"Add-on",
+			"description":"Additional features or add-ons used during assay.",
+			"type":"string"
+		},
+		"regions":{
 			"title":" Xenium Slide Regions",
 			"description":"Xenium Slide Regions:, please fill in one entry for each region to be acquired using the 'ADD ITEM' button.",
 			"type":"array",
@@ -19,82 +49,52 @@
 				"description":"Metadata related to a specific region on a Xenium slide.",
 				"type":"object",
 				"properties":{
-					"project":{
-						"title":"Project",
-						"description":"The name of the associated research project.",
-						"type":"string"
-					},
-					"OE project":{
-						"title":"OE Project",
-						"description":"Identifier for the OE project.",
-						"type":"string"
-					},
-					"panel":{
-						"title":"Panel",
-						"description":"Panel used in the Xenium assay.",
-						"type":"string"
-					},
 					"species":{
 						"title":"Species",
 						"description":"Species from which the sample was derived.",
 						"type":"string"
 					},
-					"section type":{
+					"section_type":{
 						"title":"Section Type",
 						"description":"The type of tissue section (e.g., FFPE, frozen).",
 						"type":"string"
 					},
-					"sampleID":{
+					"sample_id":{
 						"title":"Sample ID",
 						"description":"Unique identifier for the biological sample.",
 						"type":"string"
 					},
-					"sample type":{
+					"sample_type":{
 						"title":"Sample Type",
 						"description":"Type of sample (e.g., tissue, cell line).",
 						"type":"string"
 					},
-					"Sex":{
+					"sex":{
 						"title":"Sex",
 						"description":"Sex of the donor organism.",
 						"type":"string"
 					},
-					"data acquisition":{
-						"title":"Data Acquisition",
-						"description":"Data acquisition.",
-						"type":"string"
-					},
-					"kit version":{
-						"title":"Kit Version",
-						"description":"Version of the Xenium kit used.",
-						"type":"string"
-					},
-					"add-on":{
-						"title":"Add-on",
-						"description":"Additional features or add-ons used during assay.",
-						"type":"string"
-					},
-					"disease status donor":{
+					"disease_status_donor":{
 						"title":"Disease Status Donor",
 						"description":"Disease status of the donor.",
 						"type":"string"
 					},
-					"disease status specimen":{
+					"disease_status_specimen":{
 						"title":"Disease Status Specimen",
 						"description":"Disease status of the specimen.",
 						"type":"string"
 					},
-					"developmental stage":{
+					"developmental_stage":{
 						"title":"Developmental Stage",
 						"description":"Developmental stage of the specimen (e.g., adult, fetal).",
 						"type":"string"
 					},
-					"organ part":{
+					"organ_part":{
 						"title":"Organ Part",
 						"description":"Specific part of the organ from which the sample was taken.",
 						"type":"string"
 					},
-					"anatomical entity":{
+					"anatomical_entity":{
 						"title":"Anatomical Entity",
 						"description":"Anatomical entity represented by the sample (e.g., tissue type or structure).",
 						"type":"string"
@@ -126,22 +126,16 @@
 					}
 				},
 				"required":[
-					"project",
-					"OE project",
-					"panel",
 					"species",
-					"section type",
-					"sampleID",
-					"sample type",
-					"Sex",
-					"data acquisition",
-					"kit version",
-					"add-on",
-					"disease status donor",
-					"disease status specimen",
-					"developmental stage",
-					"organ part",
-					"anatomical entity",
+					"section_type",
+					"sample_id",
+					"sample_type",
+					"sex",
+					"disease_status_donor",
+					"disease_status_specimen",
+					"developmental_stage",
+					"organ_part",
+					"anatomical_entity",
 					"age",
 					"stage",
 					"histology",
