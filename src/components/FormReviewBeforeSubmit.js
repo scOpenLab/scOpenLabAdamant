@@ -78,12 +78,6 @@ const FormReviewBeforeSubmit = ({ onlineMode, openFormReviewDialog, setOpenFormR
                     }}
                 >
                     <MenuItem disabled={!onlineMode} onClick={() => {
-                        setOpenFunctions.setOpenCreateElabFTWExperimentDialog(true);
-                        setOpenFormReviewDialog(false);
-                    }} >
-                        Create eLabFTW Experiment
-                    </MenuItem>
-                    <MenuItem disabled={!onlineMode} onClick={() => {
                         submitFunctions.submitJobRequest();
                         setOpenFormReviewDialog(false);
                     }} >

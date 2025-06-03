@@ -16,17 +16,11 @@ import getValue from "../components/utils/getValue";
 import CryptoJS from "crypto-js";
 import deleteKeySchema from "../components/utils/deleteKeySchema";
 import validateAgainstSchema from "../components/utils/validateAgainstSchema";
-import CreateELabFTWExperimentDialog from "../components/CreateELabFTWExperimentDialog";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import prepareDataForDescList from "../components/utils/prepareDataForDescList";
 import array2objectAnyOf from "../components/utils/array2objectAnyOf";
-import SchemaOne from "../schemas/all-types.json";
-import SchemaTwo from "../schemas/demo-schema.json";
-import SchemaThree from "../schemas/example-experiment-schema.json";
-import SchemaFour from "../schemas/example-request-schema.json";
-import SchemaFive from "../schemas/plasma-mds.json";
 import fillValueWithEmptyString from "../components/utils/fillValueWithEmptyString";
 import convData2FormData from "../components/utils/convData2FormData";
 import FormReviewBeforeSubmit from "../components/FormReviewBeforeSubmit";
@@ -109,7 +103,6 @@ const AdamantMain = () => {
   const [schemaWithValues, setSchemaWithValues] = useState({});
   const [schemaSpecification, setSchemaSpecification] = useState("");
   const [token, setToken] = useState("");
-  const [eLabURL, setELabURL] = useState("");
   const [experimentTitle, setExperimentTitle] = useState("");
   const [onlineMode, setOnlineMode] = useState(false);
   const [tags, setTags] = useState([]);
@@ -123,10 +116,6 @@ const AdamantMain = () => {
   const [submitText, setSubmitText] = useState("Submit Job Request");
   // for dropdown buttons
   const [anchorEl, setAnchorEl] = useState(null);
-  const [
-    openCreateElabFTWExperimentDialog,
-    setOpenCreateElabFTWExperimentDialog,
-  ] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -182,20 +171,10 @@ const AdamantMain = () => {
 
         // use available schema as a place holder
         setSchemaNameList([
-          "",
-          "all-types.json",
-          "demo-schema.json",
-          "example-experiment-schema.json",
-          "example-request-schema.json",
-          "plasma-mds.json",
+          ""
         ]);
         setSchemaList([
-          null,
-          SchemaOne,
-          SchemaTwo,
-          SchemaThree,
-          SchemaFour,
-          SchemaFive,
+          null
         ]);
 
         toast.warning(
@@ -243,20 +222,10 @@ const AdamantMain = () => {
           );
           // if unable to fetch the schemas then use the basic list of schemas
           setSchemaNameList([
-            "",
-            "all-types.json",
-            "demo-schema.json",
-            "example-experiment-schema.json",
-            "example-request-schema.json",
-            "plasma-mds.json",
+            ""
           ]);
           setSchemaList([
-            null,
-            SchemaOne,
-            SchemaTwo,
-            SchemaThree,
-            SchemaFour,
-            SchemaFive,
+            null
           ]);
         },
       });
@@ -898,166 +867,6 @@ const AdamantMain = () => {
     handleClose();
   };
 
-  // get available tags from elabftw
-  const getTagsELabFTW = () => {
-    var $ = require("jquery");
-    $.ajax({
-      type: "POST",
-      url: "/api/get_tags",
-      dataType: "json",
-      data: {
-        eLabURL: eLabURL,
-        eLabToken: token,
-      },
-      success: function (status) {
-        console.log("Tags retrieved successfully");
-        //let arr = [];
-        //for (let i = 0; i < status.length; i++) {
-        //  arr.push(status[i]["tag"]);
-        //}
-        setRetrievedTags(status);
-        toast.success(`Successfully retrieved the tags!`, {
-          toastId: "fetchingTagsSuccess",
-        });
-      },
-      error: function (status) {
-        console.log("Failed to retrieve tags");
-        console.log(status);
-        toast.error(`Failed to get the tags!\nMaybe wrong url or token?`, {
-          toastId: "fetchingTagsError",
-        });
-      },
-    });
-  };
-
-  // create an experiment in elabftw based on the schema and data
-  const createExperimentELabFTW = () => {
-    // validate the data first using ajv
-    //let content = { ...jsonData };
-    let convSchemaData = { ...convertedSchema };
-    let content = convData2FormData(
-      JSON.parse(JSON.stringify(convSchemaData["properties"]))
-    );
-
-    let contentSchema = { ...schema };
-
-    // get rid of empty values in content
-    content = removeEmpty(content);
-    if (content === undefined) {
-      content = {};
-    }
-    console.log("content", content);
-    //console.log("loadedFiles", loadedFiles)
-
-    /*
-    // get the paths where the uploaded files are from content
-    let fileEntries = []
-    for (let i=0; i<loadedFiles.length; i++) {
-      let file = loadedFiles[i]
-      let fileName = file["name"]
-      let fileType = file["type"]
-      let fileSize = file["size"]
-      //console.log(file["name"])
-      fileEntries.push(`fileupload:${fileType};${fileName};${fileSize}`)
-    }
-    //console.log(fileEntries)
-    let paths = []
-    for (let i=0; i<fileEntries.length; i++) {
-      let path = getPaths(content, fileEntries[i])
-      paths.push(path)
-    }
-    console.log(paths)
-
-    // read files from loadedFiles then insert it to the content
-    */
-
-    //
-    // validate jsonData against its schema before submission
-    //
-    const [valid, messages] = validateAgainstSchema(
-      content,
-      JSON.parse(JSON.stringify(contentSchema))
-    );
-    setErrorStuffUponValidation(messages);
-    if (!valid | (Object.keys(content).length === 0)) {
-      toast.error(
-        <>
-          <div>
-            <strong>Form data is not valid.</strong>
-          </div>
-          <div style={{ paddingBottom: "10px" }}>Check your inputs!</div>
-          {messages.map((item, index) => {
-            return <div key={index}>{index + 1 + ". " + item.message}</div>;
-          })}
-        </>,
-        {
-          autoClose: 10000,
-          toastId: "formDataError",
-        }
-      );
-      // clear states
-      setToken("");
-      setExperimentTitle("");
-      setTags([]);
-      return;
-    }
-    // call create experiment api
-    console.log("tags:", tags);
-    var $ = require("jquery");
-    $.ajax({
-      type: "POST",
-      url: "/api/create_experiment",
-      async: false,
-      dataType: "json",
-      data: {
-        javascript_data: JSON.stringify(content),
-        schema: JSON.stringify(contentSchema),
-        eLabURL: eLabURL,
-        eLabToken: token,
-        title: experimentTitle,
-        body: descriptionList,
-        tags: JSON.stringify(tags),
-      },
-      success: function (status) {
-        console.log("SUCCESS");
-        console.log(status);
-
-        // close submit dialog
-        setOpenCreateElabFTWExperimentDialog(false);
-        toast.success(
-          `Successfully created an experiment with id: ${status["experimentId"]}!`,
-          {
-            toastId: "createExperimentSuccess",
-          }
-        );
-
-        // clear states
-        setToken("");
-        setExperimentTitle("");
-        setRetrievedTags([]);
-        setTags([]);
-      },
-      error: function (status) {
-        console.log("ERROR");
-        console.log(status);
-
-        // close submit dialog
-        setOpenCreateElabFTWExperimentDialog(false);
-        toast.error(
-          `Failed to create an experiment!\nMaybe wrong url or token?`,
-          {
-            toastId: "createExperimentError",
-          }
-        );
-        // clear states
-        setToken("");
-        setExperimentTitle("");
-        setRetrievedTags([]);
-        setTags([]);
-      },
-    });
-  };
-
   // submit sem job request
   const submitJobRequest = () => {
     let convSchemaData = { ...convertedSchema };
@@ -1568,23 +1377,6 @@ const AdamantMain = () => {
         </div>
         <div style={{ padding: "10px", color: "grey" }}>ADAMANT v1.2.0</div>
       </FormContext.Provider>
-      <CreateELabFTWExperimentDialog
-        setTags={setTags}
-        tags={tags}
-        setRetrievedTags={setRetrievedTags}
-        retrievedTags={retrievedTags}
-        setExperimentTitle={setExperimentTitle}
-        createExperimentELabFTW={createExperimentELabFTW}
-        setToken={setToken}
-        token={token}
-        setELabURL={setELabURL}
-        eLabURL={eLabURL}
-        setOpenCreateElabFTWExperimentDialog={
-          setOpenCreateElabFTWExperimentDialog
-        }
-        openCreateElabFTWExperimentDialog={openCreateElabFTWExperimentDialog}
-        getTagsELabFTW={getTagsELabFTW}
-      />
       {openFormReviewDialog ? (
         <FormReviewBeforeSubmit
           onlineMode={onlineMode}
@@ -1592,7 +1384,6 @@ const AdamantMain = () => {
           setOpenFormReviewDialog={setOpenFormReviewDialog}
           descriptionList={descriptionList}
           setOpenFunctions={{
-            setOpenCreateElabFTWExperimentDialog,
             setOpenJobRequestDialog,
           }}
           submitFunctions={{ submitJobRequest }}
