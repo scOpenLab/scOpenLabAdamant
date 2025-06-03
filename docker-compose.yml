@@ -9,7 +9,9 @@ services:
     image: adamant-server
     volumes:
       - ./backend/conf:/app/conf
-      - ./backend/schemas:/app/schemas
+      - "adamant-schemas:/app/schemas"
+    networks:
+      - adamant
  # front-end 
   client:
     build:
@@ -18,3 +20,14 @@ services:
     image: adamant-client
     ports:
       - "3000:80"
+    networks:
+      - adamant
+
+volumes:
+  adamant-schemas:
+
+networks:
+  adamant:
+    driver: bridge
+    driver_opts:  # MTU needs to be lower or equal than the MTU of eth0
+      com.docker.network.driver.mtu: 1450
