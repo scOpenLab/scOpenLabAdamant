@@ -113,7 +113,7 @@ const AdamantMain = () => {
   const [openJobRequestDialog, setOpenJobRequestDialog] = useState(false);
   const [jobRequestSchemas, setJobRequestSchemas] = useState([]);
   const [submitTextList, setSubmitTextList] = useState([]);
-  const [submitText, setSubmitText] = useState("Submit Job Request");
+  const [submitText, setSubmitText] = useState("Submit Slide Metadata");
   // for dropdown buttons
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
