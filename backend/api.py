@@ -67,7 +67,7 @@ def submit_job_request():
     jsdata = request.form['javascript_data']
     jsdata = json.loads(jsdata)
     #print(jsdata)
-    filename = jsdata["slide_id"] + "-region_metadata.json" 
+    filename = jsdata["slide_id"] + "-slide_metadata.json" 
     filepath = TEMP_PATH + '/' + filename
     # write the json form in the temp folder data/jsdata
     with open(filepath, 'w') as outfile:
