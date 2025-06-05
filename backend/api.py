@@ -71,7 +71,7 @@ def submit_job_request():
     filepath = TEMP_PATH + '/' + filename
     # write the json form in the temp folder data/jsdata
     with open(filepath, 'w') as outfile:
-        outfile.write(json.dumps(jsdata))
+        outfile.write(json.dumps(jsdata, indent="\t"))
 
     cmd = [PATH_TO_MC, "put", filepath, BUCKET_PATH]
     upload = subprocess.run(cmd)
