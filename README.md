@@ -37,6 +37,10 @@ The main changes are:
 
 The slide metadata in json format are submitted to the ScOpenLab S3 bucket. Resubmitting a form with the same slide id will overwrite the previous submission! 
 
+## How the slide metadata files will be used
+<img width="637" alt="{2818CD58-6F6D-49C2-8AF2-E3E34BAC80A8}" src="https://github.com/user-attachments/assets/1656ab72-3904-422a-a77d-734314dbb852" />
+THe slide metadata will then be read from the bucket at the end of ech region run by the `endofrun.sh` script on the Xenium instrument, and used to automate data transfer to the bucket.
+See here for more details: https://github.com/scOpenLab/xenium_metadata_writer/blob/main/README.md#workflow
 
 # Deployment
 We recommend deploying Adamant with docker-compose, which can be done with ease:
