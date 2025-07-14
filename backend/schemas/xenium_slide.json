@@ -1,148 +1,161 @@
 {
-	"$schema":"http://json-schema.org/draft-07/schema#",
-	"$id":"https://xenium-slide",
-	"title":"Xenium Slide Metadata",
-	"description":"Xenium Slide Metadata, please click the 'COMPILE' button at the bottom before filling in the form.",
-	"type":"object",
-	"properties":{
-		"slide_id":{
-			"title":"Slide ID",
-			"description":"Xenium Slide ID (e.g. 0001676)",
-			"type":"string"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://xenium-slide",
+  "title": "Xenium Slide Metadata",
+  "description": "Xenium Slide Metadata, please click the 'COMPILE' button at the bottom before filling in the form.",
+  "type": "object",
+  "properties": {
+	  "slide_id": {
+			"title": "Slide ID",
+			"description": "Xenium Slide ID (e.g. 0001676)",
+			"type": "string"
+	   },
+	   "project": {
+	        "title": "Project",
+		    "description": "The name of the associated research project.",
+		    "type": "string"
+	   },
+	   "OE_project": {
+		     "title": "OE Project",
+		     "description": "Identifier for the OE project.",
+		     "type": "string"
+	   },
+	   "panel": {
+	         "title": "Panel",
+	  	     "description": "Panel used in the Xenium assay.",
+		     "type": "string"
+	   },
+	   "data_acquisition": {
+	         "title": "Data Acquisition",
+		     "description": "Data acquisition.",
+		     "type": "string"
 		},
-		"project":{
-			"title":"Project",
-			"description":"The name of the associated research project.",
-			"type":"string"
+		"kit_version": {
+		     "title": "Kit Version",
+		     "description": "Version of the Xenium kit used.",
+		     "type": "string"
 		},
-		"OE_project":{
-			"title":"OE Project",
-			"description":"Identifier for the OE project.",
-			"type":"string"
+		"add_on": {
+		     "title": "Add-on",
+		     "description": "Additional features or add-ons used during assay.",
+		     "type": "string"
 		},
-		"panel":{
-			"title":"Panel",
-			"description":"Panel used in the Xenium assay.",
-			"type":"string"
+		"species": {
+		     "title": "Species",
+		     "description": "Species from which the sample was derived.",
+		     "type": "string"
 		},
-		"data_acquisition":{
-			"title":"Data Acquisition",
-			"description":"Data acquisition.",
-			"type":"string"
+		"section_type": {
+			 "title": "Section Type",
+			 "description": "The type of tissue section (e.g., FFPE, frozen).",
+			 "type": "string",
+			 "enum": [
+				"FFPE",
+				"Fresh Frozen"
+			 ]
 		},
-		"kit_version":{
-			"title":"Kit Version",
-			"description":"Version of the Xenium kit used.",
-			"type":"string"
+		"ScOpenLab slide metadata version": {
+			 "title": "scopenlab_xenium_metadata_version",
+			 "description": "The type of tissue section (e.g., FFPE, frozen).",
+			 "type": "string",
+		     "enum": [
+				"1.0"
+			 ]
 		},
-		"add_on":{
-			"title":"Add-on",
-			"description":"Additional features or add-ons used during assay.",
-			"type":"string"
-		},
-		"regions":{
-			"title":" Xenium Slide Regions",
-			"description":"Xenium Slide Regions:, please fill in one entry for each region to be acquired using the 'ADD ITEM' button.",
-			"type":"array",
-			"items":{
-				"title":"Slide Region Metadata",
-				"description":"Metadata related to a specific region on a Xenium slide.",
-				"type":"object",
-				"properties":{
-					"species":{
-						"title":"Species",
-						"description":"Species from which the sample was derived.",
-						"type":"string"
+		"regions": {
+			"title": " Xenium Slide Regions",
+			"description": "Xenium Slide Regions:, please fill in one entry for each region to be acquired using the 'ADD ITEM' button.",
+			"type": "array",
+			"items": {
+				"title": "Slide Region Metadata",
+				"description": "Metadata related to a specific region on a Xenium slide.",
+				"type": "object",
+				"properties": {
+					"sample_id": {
+						"title": "Sample ID",
+						"description": "Unique identifier for the biological sample.",
+						"type": "string"
 					},
-					"section_type":{
-						"title":"Section Type",
-						"description":"The type of tissue section (e.g., FFPE, frozen).",
-						"type":"string"
+					"sample_type": {
+						"title": "Sample Type",
+						"description": "Type of sample (e.g., tissue, cell line).",
+						"type": "string"
 					},
-					"sample_id":{
-						"title":"Sample ID",
-						"description":"Unique identifier for the biological sample.",
-						"type":"string"
+					"sex": {
+						"title": "Sex",
+						"description": "Sex of the donor organism.",
+						"type": "string",
+						"enum": [
+							"M",
+							"F",
+							"NA"
+						]
 					},
-					"sample_type":{
-						"title":"Sample Type",
-						"description":"Type of sample (e.g., tissue, cell line).",
-						"type":"string"
+					"disease_status_donor": {
+						"title": "Disease Status Donor",
+						"description": "Disease status of the donor.",
+						"type": "string"
 					},
-					"sex":{
-						"title":"Sex",
-						"description":"Sex of the donor organism.",
-						"type":"string"
+					"disease_status_specimen": {
+						"title": "Disease Status Specimen",
+						"description": "Disease status of the specimen.",
+						"type": "string"
 					},
-					"disease_status_donor":{
-						"title":"Disease Status Donor",
-						"description":"Disease status of the donor.",
-						"type":"string"
+					"developmental_stage": {
+						"title": "Developmental Stage",
+						"description": "Developmental stage of the specimen (e.g., adult, fetal).",
+						"type": "string"
 					},
-					"disease_status_specimen":{
-						"title":"Disease Status Specimen",
-						"description":"Disease status of the specimen.",
-						"type":"string"
+					"organ_part": {
+						"title": "Organ Part",
+						"description": "Specific part of the organ from which the sample was taken.",
+						"type": "string"
 					},
-					"developmental_stage":{
-						"title":"Developmental Stage",
-						"description":"Developmental stage of the specimen (e.g., adult, fetal).",
-						"type":"string"
+					"anatomical_entity": {
+						"title": "Anatomical Entity",
+						"description": "Anatomical entity represented by the sample (e.g., tissue type or structure).",
+						"type": "string"
 					},
-					"organ_part":{
-						"title":"Organ Part",
-						"description":"Specific part of the organ from which the sample was taken.",
-						"type":"string"
+					"age": {
+						"title": "Age",
+						"description": "Age of the donor.",
+						"type": "string"
 					},
-					"anatomical_entity":{
-						"title":"Anatomical Entity",
-						"description":"Anatomical entity represented by the sample (e.g., tissue type or structure).",
-						"type":"string"
+					"stage": {
+						"title": "Stage",
+						"description": "Stage of disease or developmental process.",
+						"type": "string"
 					},
-					"age":{
-						"title":"Age",
-						"description":"Age of the donor.",
-						"type":"string"
+					"histology": {
+						"title": "Histology",
+						"description": "Histological classification of the sample.",
+						"type": "string"
 					},
-					"stage":{
-						"title":"Stage",
-						"description":"Stage of disease or developmental process.",
-						"type":"string"
+					"treatment": {
+						"title": "Treatment",
+						"description": "Any treatment the donor or sample received.",
+						"type": "string"
 					},
-					"histology":{
-						"title":"Histology",
-						"description":"Histological classification of the sample.",
-						"type":"string"
-					},
-					"treatment":{
-						"title":"Treatment",
-						"description":"Any treatment the donor or sample received.",
-						"type":"string"
-					},
-					"region_id":{
-						"title":"Region ID",
-						"description":"Unique identifier for the region on the slide.",
-						"type":"string"
+					"region_id": {
+					"title": "Region ID",
+					"description": "Unique identifier for the region on the slide.",
+					"type": "string",
+					"enum": [
+						"A1", "A2", "A3", "A4", "A5",
+						"B1", "B2", "B3", "B4", "B5",
+						"C1", "C2", "C3", "C4", "C5",
+						"D1", "D2", "D3", "D4", "D5",
+						"E1", "E2", "E3", "E4", "E5",
+						"F1", "F2", "F3", "F4", "F5",
+						"G1", "G2", "G3", "G4", "G5",
+						"H1", "H2", "H3", "H4", "H5"
+						]
 					}
-				},
-				"required":[
-					"species",
-					"section_type",
-					"sample_id",
-					"sample_type",
-					"sex",
-					"disease_status_donor",
-					"disease_status_specimen",
-					"developmental_stage",
-					"organ_part",
-					"anatomical_entity",
-					"age",
-					"stage",
-					"histology",
-					"treatment",
-					"region_id"
-				]
-			}
-		}
+		 },
+	"required": [
+		"region_id"
+	]
+	}
+	}
 	}
 }
