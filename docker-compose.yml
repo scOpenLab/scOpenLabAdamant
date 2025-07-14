@@ -9,7 +9,6 @@ services:
     image: adamant-server
     volumes:
       - ./backend/conf:/app/conf
-      - "adamant-schemas:/app/schemas"
     networks:
       - adamant
  # front-end 
