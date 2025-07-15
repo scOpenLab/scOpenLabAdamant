@@ -137,8 +137,13 @@
 						"type": "string"
 					},
 					"region_id": {
-					"title": "Region ID",
-					"description": "Unique identifier for the region on the slide.",
+						"title": "Region ID",
+						"description": "Unique identifier for the region on the slide.",
+						"type": "string"
+					},
+					"region_grid_ref": {
+					"title": "Region Gride Reference",
+					"description": "Grid reference for the region's position on the slide.",
 					"type": "string",
 					"enum": [
 						"A1", "A2", "A3", "A4", "A5",
